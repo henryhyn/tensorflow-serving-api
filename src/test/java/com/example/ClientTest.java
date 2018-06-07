@@ -23,11 +23,10 @@ import java.nio.charset.StandardCharsets;
 public class ClientTest {
     @Test
     public void test1() {
+        Predict.PredictRequest.Builder request = Predict.PredictRequest.newBuilder();
         Model.ModelSpec.Builder modelSpec = Model.ModelSpec.newBuilder();
         modelSpec.setName("mnist");
         modelSpec.setSignatureName("serving_default");
-
-        Predict.PredictRequest.Builder request = Predict.PredictRequest.newBuilder();
         request.setModelSpec(modelSpec);
 
         TensorShapeProto.Dim dim = TensorShapeProto.Dim.newBuilder().setSize(1).build();
@@ -72,11 +71,10 @@ public class ClientTest {
 
         Example example = Example.newBuilder().setFeatures(features).build();
 
+        Predict.PredictRequest.Builder request = Predict.PredictRequest.newBuilder();
         Model.ModelSpec.Builder modelSpec = Model.ModelSpec.newBuilder();
         modelSpec.setName("mnist");
         modelSpec.setSignatureName("serving_default");
-
-        Predict.PredictRequest.Builder request = Predict.PredictRequest.newBuilder();
         request.setModelSpec(modelSpec);
 
         TensorShapeProto.Dim dim = TensorShapeProto.Dim.newBuilder().setSize(1).build();
