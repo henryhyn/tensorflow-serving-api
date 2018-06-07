@@ -29,7 +29,7 @@ public class ClientTest {
         modelSpec.setSignatureName("serving_default");
         request.setModelSpec(modelSpec);
 
-        TensorShapeProto.Dim dim = TensorShapeProto.Dim.newBuilder().setSize(1).build();
+        TensorShapeProto.Dim dim = TensorShapeProto.Dim.newBuilder().setSize(2).build();
         TensorShapeProto shape = TensorShapeProto.newBuilder().addDim(dim).build();
 
         TensorProto.Builder tensor = TensorProto.newBuilder();
@@ -48,6 +48,7 @@ public class ClientTest {
 
         tensor.clear();
         tensor.setDtype(DataType.DT_FLOAT);
+        tensor.addFloatVal(1.0F);
         tensor.addFloatVal(1.0F);
         request.putInputs("keep_prob", tensor.build());
 
@@ -77,12 +78,13 @@ public class ClientTest {
         modelSpec.setSignatureName("serving_default");
         request.setModelSpec(modelSpec);
 
-        TensorShapeProto.Dim dim = TensorShapeProto.Dim.newBuilder().setSize(1).build();
+        TensorShapeProto.Dim dim = TensorShapeProto.Dim.newBuilder().setSize(2).build();
         TensorShapeProto shape = TensorShapeProto.newBuilder().addDim(dim).build();
 
         TensorProto.Builder tensor = TensorProto.newBuilder();
         tensor.setTensorShape(shape);
         tensor.setDtype(DataType.DT_STRING);
+        tensor.addStringVal(example.toByteString());
         tensor.addStringVal(example.toByteString());
         request.putInputs("inputs", tensor.build());
 
